@@ -110,6 +110,7 @@ class DQN_NAF:
         critic_gradients = tape.gradient(critic_loss, self.critic_network.trainable_variables)
         self.container_network.optimizer.apply_gradients(zip(critic_gradients, self.critic_network.trainable_variables))
 
+    # step 11
     def update_target_network(self):
         q_weights = self.q_network.get_weights()
         target_weights = self.target_network.get_weights()
@@ -148,7 +149,6 @@ env = gym.make('RoboticArm-v0')
 state_dim = env.observation_space.shape[0]
 action_dim= env.action_space.shape[0]
 action_bounds = env.action_space.high
-
 # Create DQN_NAF agent and train
 agent = DQN_NAF(state_dim, action_dim, action_bounds)
 agent.train(episodes=1000)
